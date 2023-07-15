@@ -1,4 +1,3 @@
-
 # Flask App with MongoDB and Docker integration
 
 This repository contains a Flask application with MongoDB integration, allowing you to perform CRUD operations on a "USER" schema. The user schema consists of the following fields: name, email, and password. The password is stored in the MongoDB database in hashed format for security purposes.
