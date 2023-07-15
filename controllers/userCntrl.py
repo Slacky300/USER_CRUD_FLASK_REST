@@ -2,7 +2,6 @@ from flask_restful import Resource
 from flask import jsonify, request, current_app
 from models.userModel import User
 from werkzeug.security import generate_password_hash
-import re
 
 class UserCntrl(Resource):
 
@@ -34,8 +33,7 @@ class UserCntrl(Resource):
     def post(self):
 
         try:
-            name_pattern = r'^[A-Za-z\s\'.-]+$'
-            email_pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+            
 
             name = request.json['name']
             email = request.json['email']
@@ -44,14 +42,13 @@ class UserCntrl(Resource):
             if not name or not email or not password:
                 return {'message': "Data is missing required fields"}, 400
             
-            if re.match(name_pattern,name) and re.match(email_pattern,email):
+            
 
-                new_user = User(name,email,password)
-                registered_user = new_user.save(self.db)
+            new_user = User(name,email,password)
+            registered_user = new_user.save(self.db)
 
-                return registered_user,201
-            else:
-                return {"message": "Entered data is not valid"}, 400
+            return registered_user,201
+            
         
         except Exception as e:
 
